@@ -145,6 +145,10 @@ const index = () => {
   };
 
   useEffect(() => {
+    if (mode === "BLANC") {
+      setIsPrintDisabled(false);
+      return;
+    }
     // Check if name or uid is empty
     if (!name || !uid) {
       setIsPrintDisabled(true);
@@ -157,7 +161,7 @@ const index = () => {
     );
 
     setIsPrintDisabled(!allItemsValid);
-  }, [items, name, uid]);
+  }, [items, name, uid, mode]);
 
   return (
     <div className={`${styles.pagesBg} ${styles.billPageWrapper}`}>
@@ -202,60 +206,68 @@ const index = () => {
         </Button>
       </ButtonGroup>
 
-      <ButtonGroup
-        className={styles.currencySelect}
-        sx={{
-          position: "fixed",
-          right: "20px",
-          top: "20px",
-          backgroundColor: "white",
-          zIndex: 100,
-        }}
-        disableElevation
-        variant="contained"
-        orientation="vertical"
-        aria-label="currency button group"
-      >
-        {currencies.map((cur) => (
-          <Button
-            key={cur.value}
-            onClick={() => changeCurrency(cur.value)}
-            sx={{
-              backgroundColor:
-                currency.resolvedOptions().currency === cur.value
-                  ? "#1477cc"
-                  : "black",
+      {mode === "BILL" ? (
+        <ButtonGroup
+          className={styles.currencySelect}
+          sx={{
+            position: "fixed",
+            right: "20px",
+            top: "20px",
+            backgroundColor: "white",
+            zIndex: 100,
+          }}
+          disableElevation
+          variant="contained"
+          orientation="vertical"
+          aria-label="currency button group"
+        >
+          {currencies.map((cur) => (
+            <Button
+              key={cur.value}
+              onClick={() => changeCurrency(cur.value)}
+              sx={{
+                backgroundColor:
+                  currency.resolvedOptions().currency === cur.value
+                    ? "#1477cc"
+                    : "black",
 
-              color:
-                currency.resolvedOptions().currency === cur.value
-                  ? "white"
-                  : "white",
-              opacity:
-                currency.resolvedOptions().currency === cur.value ? 1 : 0.5,
-            }}
-          >
-            {cur.label}
-          </Button>
-        ))}
-      </ButtonGroup>
-      <div
-        className={styles.addIcon}
-        onClick={() => {
-          if (items.length < 6)
-            setItems([
-              ...items,
-              {
-                qty: "",
-                desc: "",
-                unit: "",
-                price: "",
-                total: "",
-              },
-            ]);
-        }}
-      >
-        <Image src={addIcon} alt="add" />
-      </div>
+                color:
+                  currency.resolvedOptions().currency === cur.value
+                    ? "white"
+                    : "white",
+                opacity:
+                  currency.resolvedOptions().currency === cur.value ? 1 : 0.5,
+              }}
+            >
+              {cur.label}
+            </Button>
+          ))}
+        </ButtonGroup>
+      ) : (
+        <></>
+      )}
+      {mode === "BILL" ? (
+        <div
+          className={styles.addIcon}
+          onClick={() => {
+            if (items.length < 6)
+              setItems([
+                ...items,
+                {
+                  qty: "",
+                  desc: "",
+                  unit: "",
+                  price: "",
+                  total: "",
+                },
+              ]);
+          }}
+        >
+          <Image src={addIcon} alt="add" />
+        </div>
+      ) : (
+        <></>
+      )}
       <Button
         className={styles.printIcon}
         onClick={handlePrint}
