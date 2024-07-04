@@ -758,7 +758,9 @@ const index = () => {
           </>
         )}
         {/*  shared Info */}
-        <div className={styles.footerInfo}>
+        <div
+          className={mode === "BILL" ? styles.footerInfo : styles.footerInfo}
+        >
           <div>
             <p
               style={{

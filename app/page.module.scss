@@ -76,9 +76,8 @@
   background-image: url("./assets/blanc.png");
   background-size: cover;
   position: relative;
-  zoom: 110%;
+  zoom: 100%;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
-  // overflow: hidden;
 }
 
 .invoiceWrapperBill {
@@ -91,9 +90,7 @@
   background-image: url("./assets/blanc.png");
   background-size: cover;
   position: relative;
-  zoom: 110%;
-  // overflow: hidden;
-
+  zoom: 100%;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
 }
 .textNote {
@@ -127,7 +124,7 @@
   top: 330px;
   left: 70px;
   width: 660px;
-  height: 600px;
+  height: 500px;
   z-index: 999;
   overflow-y: auto;
   overflow-x: hidden;
@@ -160,6 +157,7 @@
     margin: 10px 0;
   }
 }
+
 //  Bill
 
 .invoiceHeaderBg {
