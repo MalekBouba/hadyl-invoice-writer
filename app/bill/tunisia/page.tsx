@@ -1,13 +1,9 @@
 "use client";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../page.module.scss";
-import { Android12Switch } from "@/components/BillSwitch";
 import {
   Button,
   ButtonGroup,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
   TextField,
   TextareaAutosize,
 } from "@mui/material";
@@ -202,7 +198,7 @@ const index = () => {
             opacity: mode === "BILL" ? 1 : 0.5,
           }}
         >
-          BILL
+          Invoice
         </Button>
       </ButtonGroup>
 

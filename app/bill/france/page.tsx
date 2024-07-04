@@ -1,19 +1,15 @@
 "use client";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../page.module.scss";
-import { Android12Switch } from "@/components/BillSwitch";
 import {
   Button,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
+  ButtonGroup,
   TextField,
   TextareaAutosize,
 } from "@mui/material";
 import addIcon from "../../assets/icons/add.svg";
 import printIcon from "../../assets/icons/print.svg";
 import Image from "next/image";
-import stamp from "../../assets/stamp.png";
 import phone from "../../assets/icons/phone.svg";
 import locationIcon from "../../assets/icons/location.svg";
 import QRCode from "react-qr-code";
@@ -37,12 +33,19 @@ const index = () => {
       currency: "EUR",
     })
   );
-  const changeCurrency = (event: SelectChangeEvent<string>) => {
-    const newCurrency = event.target.value;
+  const currencies = [
+    { value: "EUR", label: "€ - Euro" },
+    { value: "USD", label: "$ - US Dollar" },
+    { value: "GBP", label: "£ - UK Pound" },
+    { value: "TND", label: "TND - Tunisian Dinar" },
+    { value: "CHF", label: "CHF - Swiss Franc" },
+  ];
+
+  const changeCurrency = (currencyCode: string) => {
     setCurrency(
       new Intl.NumberFormat("fr-FR", {
         style: "currency",
-        currency: newCurrency,
+        currency: currencyCode,
       })
     );
   };
@@ -114,7 +117,6 @@ const index = () => {
         : currency.format(0),
     }));
 
-    // Update the state with formatted values for printing
     setItems(printItems);
     setTht(currency.format(parseFloat(Tht)));
     setTtc(currency.format(parseFloat(Ttc)));
@@ -141,6 +143,11 @@ const index = () => {
   };
 
   useEffect(() => {
+    if (mode === "BLANC") {
+      setIsPrintDisabled(false);
+      return;
+    }
+
     // Check if name or uid is empty
     if (!name || !uid) {
       setIsPrintDisabled(true);
@@ -153,42 +160,95 @@ const index = () => {
     );
 
     setIsPrintDisabled(!allItemsValid);
-  }, [items, name, uid]);
+  }, [items, name, uid, mode]);
 
   return (
     <div className={`${styles.pagesBg} ${styles.billPageWrapper}`}>
       {/* control */}
-      <Android12Switch
+      <ButtonGroup
         className={styles.billSwitch}
-        onChange={() => {
-          setMode((prev) => (prev === "BILL" ? "BLANC" : "BILL"));
-        }}
-      />
-      <Select
-        labelId="currency-select-label"
-        id="currency-select"
-        value={currency.resolvedOptions().currency}
-        label="Currency"
-        onChange={changeCurrency}
-        style={{
+        sx={{
           position: "fixed",
-          right: "20px",
+          left: "20px",
           top: "20px",
-          width: "150px",
           backgroundColor: "white",
+          ml: 1,
+          zIndex: 100,
         }}
-        className={styles.currencySelect}
+        disableElevation
+        variant="contained"
+        aria-label="Mode button group"
       >
-        <MenuItem value="EUR">€ - Euro</MenuItem>
-        <MenuItem value="USD">$ - US Dollar</MenuItem>
-        <MenuItem value="GBP">£ - UK Pound</MenuItem>
-        <MenuItem value="TND"> TND - Tunisian Dinar</MenuItem>
-        <MenuItem value="CHF">CHF - Swiss Franc</MenuItem>
-      </Select>
-      <div
-        className={styles.addIcon}
-        onClick={() => {
-          if (items.length < 6)
+        <Button
+          onClick={() => {
+            setMode("BLANC");
+          }}
+          sx={{
+            backgroundColor: mode === "BLANC" ? "#1477cc" : "black",
+            color: "white",
+            opacity: mode === "BLANC" ? 1 : 0.5,
+          }}
+        >
+          BLANC
+        </Button>
+        <Button
+          onClick={() => {
+            setMode("BILL");
+          }}
+          sx={{
+            backgroundColor: mode === "BILL" ? "#1477cc" : "black",
+            color: "white",
+            opacity: mode === "BILL" ? 1 : 0.5,
+          }}
+        >
+          Invoice
+        </Button>
+      </ButtonGroup>
+
+      {mode === "BILL" ? (
+        <ButtonGroup
+          className={styles.currencySelect}
+          sx={{
+            position: "fixed",
+            right: "20px",
+            top: "20px",
+            backgroundColor: "white",
+            zIndex: 100,
+          }}
+          disableElevation
+          variant="contained"
+          orientation="vertical"
+          aria-label="currency button group"
+        >
+          {currencies.map((cur) => (
+            <Button
+              key={cur.value}
+              onClick={() => changeCurrency(cur.value)}
+              sx={{
+                backgroundColor:
+                  currency.resolvedOptions().currency === cur.value
+                    ? "#1477cc"
+                    : "black",
+
+                color:
+                  currency.resolvedOptions().currency === cur.value
+                    ? "white"
+                    : "white",
+                opacity:
+                  currency.resolvedOptions().currency === cur.value ? 1 : 0.5,
+              }}
+            >
+              {cur.label}
+            </Button>
+          ))}
+        </ButtonGroup>
+      ) : (
+        <></>
+      )}
+      {mode === "BILL" ? (
+        <div
+          className={styles.addIcon}
+          onClick={() => {
             setItems([
               ...items,
               {
@@ -199,10 +259,13 @@ const index = () => {
                 total: "",
               },
             ]);
-        }}
-      >
-        <Image src={addIcon} alt="add" />
-      </div>
+          }}
+        >
+          <Image src={addIcon} alt="add" />
+        </div>
+      ) : (
+        <></>
+      )}
       <Button
         className={styles.printIcon}
         onClick={handlePrint}
