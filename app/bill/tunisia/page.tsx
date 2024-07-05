@@ -269,9 +269,26 @@ const index = () => {
         <></>
       )}
       <Button
-        className={styles.printIcon}
+        className="printIcon"
         onClick={handlePrint}
         disabled={isPrintDisabled}
+        style={{
+          position: "fixed",
+          right: 0,
+          bottom: "30px",
+          margin: "20px",
+          cursor: "pointer",
+          background: "#cfd4d8",
+          borderRadius: "50%",
+          height: "60px",
+          width: "60px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "#616161",
+          fontSize: "20px",
+          boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
+        }}
       >
         <Image src={printIcon} alt="add" />
       </Button>
