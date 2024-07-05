@@ -638,7 +638,7 @@ const index = () => {
                   <div
                     className={`${styles.tableFooterTitle} ${styles.totalTtc}`}
                   >
-                    Total TTC
+                    Net to pay
                   </div>
                   <div className={styles.tableFooterValue}>
                     <TextField
