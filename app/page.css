@@ -266,7 +266,7 @@
   width: 90px;
 }
 .billItemAmount {
-  margin-left: 38px;
+  margin-left: 35px;
   width: 90px;
 }
 .billItemQte {
@@ -396,5 +396,10 @@
   }
   .billItemAmount {
     margin-left: 0px;
+    width: 100px;
+    align-items: center;
+  }
+  .no-print {
+    opacity: 0;
   }
 }

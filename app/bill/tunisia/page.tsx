@@ -599,7 +599,7 @@ const index = () => {
               </div>
 
               <div className="tableFooterTotals">
-                <div className="tableFooterRow">
+                <div className="tableFooterRow no-print">
                   <div className="tableFooterTitle">Total:</div>
                   <div className="tableFooterValue">
                     <TextField
@@ -620,7 +620,7 @@ const index = () => {
                     />
                   </div>
                 </div>
-                <div className="tableFooterRow">
+                <div className="tableFooterRow no-print">
                   <div className="tableFooterTitle">{"Discount (%) :"}</div>
                   <div className="tableFooterValue">
                     <TextField
