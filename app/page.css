@@ -7,15 +7,12 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-
-  .branchSelectionBox {
-    margin: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-  }
 }
-
-//  control
+.branchSelectionWrapper .branchSelectionBox {
+  margin: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
 .billSwitch {
   position: fixed;
   left: 0;
@@ -54,16 +51,11 @@
   font-size: 20px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
-
-// Bill Page
-// blanc
-
 .billPageWrapper {
   height: "100%";
   display: flex;
   justify-content: center;
 }
-
 .invoiceWrapperBlanc {
   width: 21cm !important;
   height: 29.7cm !important;
@@ -76,14 +68,12 @@
   zoom: 100%;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
 }
-
 .invoiceWrapperBill {
   width: 21cm !important;
   height: 29.7cm !important;
   margin: 20px 0;
   background: #fff;
   justify-self: center;
-  // background-image: url("./assets/cover.png");
   background-image: url("./assets/blanc.png");
   background-size: cover;
   position: relative;
@@ -143,20 +133,17 @@
   z-index: 999;
   overflow-y: auto;
   overflow-x: hidden;
-  span {
-    font-weight: 900;
-    color: #12acde;
-  }
-  &:nth-child(2) {
-    padding: 20px;
-  }
-  p {
-    margin: 10px 0;
-  }
 }
-
-//  Bill
-
+.footerInfo span {
+  font-weight: 900;
+  color: #12acde;
+}
+.footerInfo:nth-child(2) {
+  padding: 20px;
+}
+.footerInfo p {
+  margin: 10px 0;
+}
 .invoiceHeaderBg {
   right: 0;
   top: 130px;
@@ -165,7 +152,6 @@
   position: absolute;
   width: 480px;
 }
-
 .billInvoiceTitle {
   font-size: 70px;
   position: absolute;
@@ -182,11 +168,11 @@
   top: 140px;
   right: 0;
   width: 460px;
-  p {
-    font-weight: 400;
-    margin-right: 20px;
-    right: 0;
-  }
+}
+.invoiceHeaderInputUid p {
+  font-weight: 400;
+  margin-right: 20px;
+  right: 0;
 }
 .invoiceHeaderCustomerInput {
   display: flex;
@@ -197,16 +183,16 @@
   top: 180px;
   right: 0;
   width: 460px;
-  .texarea {
-    margin-top: -5;
-    padding: 0;
-    border: 1px solid #000;
-  }
-  p {
-    font-weight: normal;
-    margin-right: 115px;
-    right: 0;
-  }
+}
+.invoiceHeaderCustomerInput .texarea {
+  margin-top: -5;
+  padding: 0;
+  border: 1px solid #000;
+}
+.invoiceHeaderCustomerInput p {
+  font-weight: normal;
+  margin-right: 115px;
+  right: 0;
 }
 .invoiceHeaderCustomerDate {
   display: flex;
@@ -218,15 +204,13 @@
   top: 235px;
   right: 0;
   width: 460px;
-
-  p {
-    font-weight: normal;
-    margin-right: 50px;
-    right: 0;
-    font-size: 20px !important;
-  }
 }
-// Bill Table
+.invoiceHeaderCustomerDate p {
+  font-weight: normal;
+  margin-right: 50px;
+  right: 0;
+  font-size: 20px !important;
+}
 .billTable {
   position: absolute;
   top: 320px;
@@ -234,45 +218,41 @@
   width: 700px;
   border: 1px solid #eee;
   height: 330px;
-  thead {
-    background: rgba(0, 0, 0, 0.3);
-  }
-  th {
-    border-right: 0.5px solid #eee;
-    border-left: 0.5px solid #eee;
-    background-color: #eceff1;
-    color: #000000;
-    padding: 5px;
-    font-weight: 400;
-    height: 30px;
-    font-size: 100%;
-  }
-  td {
-    border-right: 0.5px solid #eee;
-    border-left: 0.5px solid #eee;
-    background-color: rgba(255, 255, 255, 0.6);
-    color: #000000;
-    padding: 5px;
-  }
 }
-
+.billTable thead {
+  background: rgba(0, 0, 0, 0.3);
+}
+.billTable th {
+  border-right: 0.5px solid #eee;
+  border-left: 0.5px solid #eee;
+  background-color: #eceff1;
+  color: #000;
+  padding: 5px;
+  font-weight: 400;
+  height: 30px;
+  font-size: 100%;
+}
+.billTable td {
+  border-right: 0.5px solid #eee;
+  border-left: 0.5px solid #eee;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #000;
+  padding: 5px;
+}
 .billTableItems {
   position: absolute;
   top: 350px;
   margin: 16px 50px;
   font-size: 26px;
   display: grid;
-
   width: 700px;
 }
-
 .billItem {
   display: grid;
   grid-template-columns: 100px 240px 60px 120px 120px;
   align-items: start;
   gap: 10px;
 }
-
 .billItemQte,
 .billItemDesc,
 .billItemUnit,
@@ -281,40 +261,32 @@
   position: relative;
   width: 100%;
 }
-
 .billItemPrice {
   margin-left: 30px;
   width: 90px;
 }
-
 .billItemAmount {
-  margin-left: 38px;
+  margin-left: 35px;
   width: 90px;
 }
-
 .billItemQte {
   width: 57%;
   margin-left: 40px;
 }
-
 .billItemUnit {
   width: 57%;
   margin-left: 25px;
 }
-
-.billItemDesc {
-  textarea {
-    width: 100%;
-    border: none;
-    outline: none;
-    resize: none;
-    font-size: 16px;
-    font-family: inherit;
-    background: transparent;
-    overflow: hidden;
-  }
+.billItemDesc textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 16px;
+  font-family: inherit;
+  background: transparent;
+  overflow: hidden;
 }
-// bill total & info
 .tableFooterMoreInfo {
   position: absolute;
   top: 660px;
@@ -337,69 +309,34 @@
   grid-template-columns: 1fr;
   gap: 10px;
 }
-
 .tableFooterRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
 }
-
 .tableFooterTitle {
   color: #a29e9e;
   font-size: 18px;
   font-weight: bold;
 }
-
 .tableFooterValue {
   text-align: right;
-
-  // Add these styles to align TextField to the right
   display: flex;
   justify-content: flex-end;
-
-  // Style for the TextField inside tableFooterValue
-  & > div {
-    width: 100%;
-  }
-
-  input {
-    text-align: right;
-    height: 30px;
-    font-size: 18px;
-  }
 }
-
+.tableFooterValue > div {
+  width: 100%;
+}
+.tableFooterValue input {
+  text-align: right;
+  height: 30px;
+  font-size: 18px;
+}
 .totalTtc {
   font-size: 22px;
   font-weight: bold;
   color: black;
 }
-// .tableFooterTotalRow {
-//   position: absolute;
-//   top: 660px;
-//   right: 40px;
-//   width: 350px;
-//   border: 2px solid #eee;
-//   font-size: 26px;
-// }
-// .tableFooterDiscountRow {
-//   position: absolute;
-//   top: 700px;
-//   right: 40px;
-//   width: 350px;
-//   border: 2px solid #eee;
-//   font-size: 26px;
-// }
-
-// .tableFooterTotalToPay {
-//   position: absolute;
-//   top: 730px;
-//   right: 40px;
-//   width: 350px;
-//   border: 2px solid #eee;
-//   font-size: 26px;
-// }
-
 .paymentDetails {
   position: absolute;
   top: 820px;
@@ -414,17 +351,14 @@
 }
 .paymentDetailsInfoTable {
   text-align: left;
-  p {
-    font-weight: 400;
-  }
-  tr {
-    th {
-      align-items: left;
-      padding: 0px 10px;
-    }
-  }
 }
-
+.paymentDetailsInfoTable p {
+  font-weight: 400;
+}
+.paymentDetailsInfoTable tr th {
+  align-items: left;
+  padding: 0px 10px;
+}
 .footer {
   position: absolute;
   bottom: 5px;
@@ -434,9 +368,9 @@
   display: flex;
   font-size: 14px;
   font-weight: 400;
-  p {
-    font-size: 22px;
-  }
+}
+.footer p {
+  font-size: 22px;
 }
 /* Styles for printing */
 @media print {
@@ -446,7 +380,9 @@
   .billSwitch {
     display: none;
   }
-
+  .billSwitch * {
+    display: none;
+  }
   .invoiceWrapperBlanc,
   .invoiceWrapperBill {
     margin: 0;
@@ -458,8 +394,12 @@
   .billItemPrice {
     margin-left: 0px;
   }
-
   .billItemAmount {
     margin-left: 0px;
+    width: 100px;
+    align-items: center;
+  }
+  .no-print {
+    opacity: 0;
   }
 }

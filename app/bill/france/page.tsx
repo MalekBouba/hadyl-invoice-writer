@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import styles from "../../page.module.scss";
+import "../../page.css";
+
 import {
   Button,
   ButtonGroup,
@@ -33,6 +34,9 @@ const index = () => {
       currency: "EUR",
     })
   );
+  useEffect(() => {
+    document.title = `Invoice ${uid}`;
+  }, [uid]);
   const currencies = [
     { value: "EUR", label: "€ - Euro" },
     { value: "USD", label: "$ - US Dollar" },
@@ -40,7 +44,13 @@ const index = () => {
     { value: "TND", label: "TND - Tunisian Dinar" },
     { value: "CHF", label: "CHF - Swiss Franc" },
   ];
-
+  useEffect(() => {
+    if (!window.location.hash) {
+      //@ts-ignore
+      window.location = window.location + "#loaded";
+      window.location.reload();
+    }
+  }, []);
   const changeCurrency = (currencyCode: string) => {
     setCurrency(
       new Intl.NumberFormat("fr-FR", {
@@ -163,10 +173,10 @@ const index = () => {
   }, [items, name, uid, mode]);
 
   return (
-    <div className={`${styles.pagesBg} ${styles.billPageWrapper}`}>
+    <div className={`pagesBg billPageWrapper`}>
       {/* control */}
       <ButtonGroup
-        className={styles.billSwitch}
+        className="billSwitch"
         sx={{
           position: "fixed",
           left: "20px",
@@ -207,7 +217,7 @@ const index = () => {
 
       {mode === "BILL" ? (
         <ButtonGroup
-          className={styles.currencySelect}
+          className="currencySelect"
           sx={{
             position: "fixed",
             right: "20px",
@@ -247,7 +257,7 @@ const index = () => {
       )}
       {mode === "BILL" ? (
         <div
-          className={styles.addIcon}
+          className="addIcon"
           onClick={() => {
             setItems([
               ...items,
@@ -292,9 +302,7 @@ const index = () => {
       </Button>
       <div
         className={
-          mode === "BILL"
-            ? styles.invoiceWrapperBill
-            : styles.invoiceWrapperBlanc
+          mode === "BILL" ? "invoiceWrapperBill" : "invoiceWrapperBlanc"
         }
       >
         {mode === "BLANC" ? (
@@ -309,7 +317,7 @@ const index = () => {
               }}
               multiline
               rows={4}
-              className={styles.textNote}
+              className="textNote"
               onChange={(e) => setHeadText(e.target.value)}
               value={headText}
             />
@@ -320,7 +328,7 @@ const index = () => {
               size="medium"
               InputProps={{
                 disableUnderline: true,
-                className: styles.textTitle,
+                className: "textTitle",
               }}
               onChange={(e) => setTitleText(e.target.value)}
               value={titleText}
@@ -333,7 +341,7 @@ const index = () => {
               InputProps={{
                 disableUnderline: true,
               }}
-              className={styles.textBody}
+              className="textBody"
               multiline
               onChange={(e) => setBodyText(e.target.value)}
               value={bodyText}
@@ -341,10 +349,10 @@ const index = () => {
           </>
         ) : (
           <>
-            <h2 className={styles.billInvoiceTitle}>Invoice</h2>
-            <div className={styles.invoiceHeader}>
-              <p className={styles.invoiceHeaderBg}></p>
-              <div className={styles.invoiceHeaderInputUid}>
+            <h2 className="billInvoiceTitle">Invoice</h2>
+            <div className="invoiceHeader">
+              <p className="invoiceHeaderBg"></p>
+              <div className="invoiceHeaderInputUid">
                 <p>Number #</p>
                 <TextField
                   id="uid"
@@ -359,7 +367,7 @@ const index = () => {
                 />
               </div>
 
-              <div className={styles.invoiceHeaderCustomerInput}>
+              <div className="invoiceHeaderCustomerInput">
                 <p>To :</p>
                 <TextField
                   id="uid"
@@ -375,7 +383,7 @@ const index = () => {
                   sx={{ width: "60%", marginLeft: "-30px", marginTop: "-5px" }}
                 />
               </div>
-              <div className={styles.invoiceHeaderCustomerDate}>
+              <div className="invoiceHeaderCustomerDate">
                 <p>Date:</p>
                 <TextField
                   id="uid"
@@ -395,7 +403,7 @@ const index = () => {
               </div>
             </div>
 
-            <table className={styles.billTable} cellSpacing="0">
+            <table className="billTable" cellSpacing="0">
               <thead>
                 <tr>
                   <th
@@ -446,10 +454,10 @@ const index = () => {
                 </tr>
               </tbody>
             </table>
-            <div className={styles.billTableItems}>
+            <div className="billTableItems">
               {items.map((item, index) => (
-                <div key={index} className={styles.billItem}>
-                  <div className={styles.billItemQte}>
+                <div key={index} className="billItem">
+                  <div className="billItemQte">
                     <TextField
                       id="qte"
                       variant="standard"
@@ -479,7 +487,7 @@ const index = () => {
                       value={item.qty}
                     />
                   </div>
-                  <div className={styles.billItemDesc}>
+                  <div className="billItemDesc">
                     <TextField
                       id="desc"
                       variant="standard"
@@ -514,7 +522,7 @@ const index = () => {
                       value={item.desc}
                     />
                   </div>
-                  <div className={styles.billItemUnit}>
+                  <div className="billItemUnit">
                     <TextField
                       id="unit"
                       variant="standard"
@@ -535,7 +543,7 @@ const index = () => {
                       value={item.unit}
                     />
                   </div>
-                  <div className={styles.billItemPrice}>
+                  <div className="billItemPrice">
                     <TextField
                       id="price"
                       variant="standard"
@@ -565,7 +573,7 @@ const index = () => {
                       value={item.price}
                     />
                   </div>
-                  <div className={styles.billItemAmount}>
+                  <div className="billItemAmount">
                     <TextField
                       id="amount"
                       variant="standard"
@@ -581,7 +589,7 @@ const index = () => {
               ))}
             </div>
             <div>
-              <div className={styles.tableFooterMoreInfo}>
+              <div className="tableFooterMoreInfo">
                 <TextField
                   id="moreInfo"
                   variant="standard"
@@ -595,10 +603,10 @@ const index = () => {
                 />
               </div>
 
-              <div className={styles.tableFooterTotals}>
-                <div className={styles.tableFooterRow}>
-                  <div className={styles.tableFooterTitle}>Total HT :</div>
-                  <div className={styles.tableFooterValue}>
+              <div className="tableFooterTotals">
+                <div className="tableFooterRow">
+                  <div className="tableFooterTitle">Total HT :</div>
+                  <div className="tableFooterValue">
                     <TextField
                       id="total"
                       variant="standard"
@@ -617,9 +625,9 @@ const index = () => {
                     />
                   </div>
                 </div>
-                <div className={styles.tableFooterRow}>
-                  <div className={styles.tableFooterTitle}>{"TVA (%) :"}</div>
-                  <div className={styles.tableFooterValue}>
+                <div className="tableFooterRow">
+                  <div className="tableFooterTitle">{"TVA (%) :"}</div>
+                  <div className="tableFooterValue">
                     <TextField
                       id="discount"
                       variant="standard"
@@ -639,13 +647,11 @@ const index = () => {
                     />
                   </div>
                 </div>
-                <div className={styles.tableFooterRow}>
-                  <div
-                    className={`${styles.tableFooterTitle} ${styles.totalTtc}`}
-                  >
+                <div className="tableFooterRow">
+                  <div className="styles.tableFooterTitle styles.totalTtc">
                     Total TTC
                   </div>
-                  <div className={styles.tableFooterValue}>
+                  <div className="tableFooterValue">
                     <TextField
                       id="netToPay"
                       variant="standard"
@@ -666,13 +672,13 @@ const index = () => {
                 </div>
               </div>
             </div>
-            <div className={styles.paymentDetails}>
+            <div className="paymentDetails">
               <div>
-                <div className={styles.paymentDetailsInfo}>
+                <div className="paymentDetailsInfo">
                   <table
                     cellPadding="0"
                     cellSpacing="0"
-                    className={styles.paymentDetailsInfoTable}
+                    className="paymentDetailsInfoTable"
                   >
                     <tbody>
                       <tr>
@@ -763,7 +769,7 @@ const index = () => {
           </>
         )}
         {/*  shared Info */}
-        <div className={styles.footerInfo}>
+        <div className="footerInfo">
           <div>
             <p
               style={{
@@ -795,7 +801,7 @@ const index = () => {
             />
           </p>
         </div>
-        <div className={styles.footer}>
+        <div className="footer">
           <p> SAP Integration - Maintenance - Support</p>
         </div>
       </div>
